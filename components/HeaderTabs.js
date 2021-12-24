@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 export default function HeaderTabs() {
   const [activeTab, setActiveTab] = useState("Delivery");
   return (
-    <View style={{ flexDirection: "row", alignSelf: "center", marginTop: 40 }}>
+    <View style={{ flexDirection: "row", alignSelf: "center" }}>
       <HeaderButton
         text="Delivery"
         btnColor="black"

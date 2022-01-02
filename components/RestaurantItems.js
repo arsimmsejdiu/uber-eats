@@ -14,7 +14,6 @@ export default function RestaurantItems({ restaurantData }) {
           <RestaurantInfo
             name={restaurant.name}
             rating={restaurant.rating}
-            categories={restaurant.categories}
           />
         </View>
       ))}
@@ -31,34 +30,8 @@ const RestaurantImage = ({ image }) => (
   </>
 );
 
-const RestaurantInfo = ({ name, rating, categories }) => (
+const RestaurantInfo = ({ name, rating }) => (
   <View>
-    <View style={{ flexDirection: "row" }}>
-      {categories.map((category, index) => (
-        <View
-          key={index}
-          style={{
-            backgroundColor: "green",
-            marginRight: 5,
-            top: 10,
-            borderRadius: 30,
-            padding: 5,
-          }}
-        >
-          <Text
-            key={index}
-            style={{
-              fontSize: 12,
-              color: "white",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            {category}
-          </Text>
-        </View>
-      ))}
-    </View>
     <View
       style={{
         flexDirection: "row",

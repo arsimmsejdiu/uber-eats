@@ -13,12 +13,18 @@ export default function Navigation({ text }) {
         paddingRight: 20,
       }}
     >
-      <Image
-        source={{
-          uri: "https://logo-marque.com/wp-content/uploads/2020/11/Uber-Eats-Logo.png",
-        }}
-        style={{ width: "30%", height: 60 }}
-      />
+      <View style={{ flexDirection: "row", width: "50%" }}>
+        <Image
+          source={{
+            uri: "https://logo-marque.com/wp-content/uploads/2020/11/Uber-Eats-Logo.png",
+          }}
+          style={{ width: "60%", height: 60 }}
+        />
+        <Text style={{ fontSize: 10, color: "#9c9c9c", marginTop: 35 }}>
+          home
+        </Text>
+      </View>
+
       <TouchableOpacity>
         <Text style={{ fontWeight: "bold" }}>{text}</Text>
       </TouchableOpacity>

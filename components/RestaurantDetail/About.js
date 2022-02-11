@@ -29,7 +29,7 @@ export default function About() {
 }
 
 const RestaurantImage = ({ image }) => (
-  <Image source={{ uri: image }} style={{ width: "100%", height: 200 }} />
+  <Image source={{ uri: image }} style={{ width: "100%", height: 180 }} />
 );
 
 const RestaurantTitle = ({ name }) => (

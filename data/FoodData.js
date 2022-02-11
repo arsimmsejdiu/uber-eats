@@ -1,4 +1,4 @@
-export const food = [
+export const foods = [
     {
         title: "Lasagna",
         description: "With butter lettuce, tomato and sauce bechamel",

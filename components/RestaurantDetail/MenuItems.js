@@ -1,12 +1,7 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import React from "react";
-import { food } from "../../data/FoodData";
+import { foods } from "../../data/FoodData";
+import { Divider } from "react-native-elements";
 
 const styles = StyleSheet.create({
   menuItemStyle: {
@@ -17,45 +12,44 @@ const styles = StyleSheet.create({
 
   titleStyles: {
     fontSize: 19,
-    fontWeight: "600",
-  },
-  foodInfo: {
-    width: 240,
-    justifyContent: "space-evenly",
-  },
-  foodImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 8,
-    marginLeft: 10,
-  },
+    fontWeight: "bold",
+  }
 });
 
 export default function MenuItems() {
   return (
-    <View>
-      {food.map((item, index) => (
-        <TouchableOpacity key={index}>
-          <View style={styles.menuItemStyle} >
-            <FoodInfo item={item} />
-            <FoodImage item={item} />
+    <ScrollView showsVerticalScrollIndicator={false}>
+      {foods.map((food, index) => (
+        <View key={index}>
+          <View style={styles.menuItemStyle}>
+            <FoodInfo food={food} />
+            <FoodImage food={food} />
           </View>
-        </TouchableOpacity>
+          <Divider width={0.2} orientation="vertical" />
+        </View>
       ))}
-    </View>
+    </ScrollView>
   );
 }
 
-const FoodInfo = ({ item }) => (
-  <View style={styles.foodInfo}>
-    <Text style={styles.titleStyles}>{item.title}</Text>
-    <Text>{item.description}</Text>
-    <Text>{item.price}</Text>
+const FoodInfo = (props) => (
+  <View style={{ width: 240, justifyContent: "space-evenly" }}>
+    <Text style={styles.titleStyles}>{props.food.title}</Text>
+    <Text>{props.food.description}</Text>
+    <Text>{props.food.price}</Text>
   </View>
 );
 
-const FoodImage = ({ item }) => (
+const FoodImage = ({ marginLeft, ...props }) => (
   <View>
-    <Image source={{ uri: item.image }} style={styles.foodImage} />
+    <Image
+      source={{ uri: props.food.image }}
+      style={{
+        width: 100,
+        height: 100,
+        borderRadius: 8,
+        marginLeft: marginLeft,
+      }}
+    />
   </View>
 );

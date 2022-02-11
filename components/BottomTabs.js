@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
@@ -22,12 +22,14 @@ export default BottomTabs = () => {
 };
 
 const Icon = ({ icon, text }) => (
-  <View>
-    <FontAwesome5
-      name={icon}
-      size={25}
-      style={{ marginBottom: 3, alignSelf: "center" }}
-    />
-    <Text>{text}</Text>
-  </View>
+  <TouchableOpacity>
+    <View>
+      <FontAwesome5
+        name={icon}
+        size={25}
+        style={{ marginBottom: 3, alignSelf: "center" }}
+      />
+      <Text>{text}</Text>
+    </View>
+  </TouchableOpacity>
 );

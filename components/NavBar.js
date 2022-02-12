@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 
-export default function Navigation({ text }) {
+export default function NaviBar({ text }) {
   return (
     <View
       style={{
@@ -20,9 +20,9 @@ export default function Navigation({ text }) {
           }}
           style={{ width: "60%", height: 60 }}
         />
-        <Text style={{ fontSize: 10, color: "#9c9c9c", marginTop: 35 }}>
+        {/* <Text style={{ fontSize: 10, color: "#9c9c9c", marginTop: 35 }}>
           home
-        </Text>
+        </Text> */}
       </View>
 
       <TouchableOpacity>

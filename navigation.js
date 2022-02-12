@@ -7,13 +7,13 @@ import RestaurantDetail from "./screens/RestaurantDetail";
 export default function RootNavigation() {
   const Stack = createStackNavigator();
 
-  const screenOption = {
+  const screenOptions = {
     headerShown: false,
   };
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home" screenOption={screenOption}>
+      <Stack.Navigator initialRouteName="Home" screenOptions={screenOptions}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="RestaurantDetail" component={RestaurantDetail} />
       </Stack.Navigator>

@@ -10,7 +10,7 @@ let cartReducer = (state = defaultState, action) => {
         items: [...newState.selectedItems, action.payload],
         restaurantName: action.payload.restaurantName,
       };
-      console.log(newState, "the new state works...");
+      console.log(newState, "the newState works...");
       return newState;
     }
     default: return state;

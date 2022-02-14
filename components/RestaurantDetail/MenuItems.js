@@ -1,33 +1,43 @@
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import React from "react";
-
 import { Divider } from "react-native-elements";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { useDispatch, useSelector } from "react-redux";
 
-const styles = StyleSheet.create({
-  menuItemStyle: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    margin: 20,
-  },
+export default function MenuItems({ foods, restaurantName }) {
+  const dispatch = useDispatch();
+  const selectItem = (item, checkboxValue) =>
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: { ...item, restaurantName, checkboxValue },
+    });
 
-  titleStyles: {
-    fontSize: 19,
-    fontWeight: "bold",
-  }
-});
+  const cartItems = useSelector(
+    (state) => state.cartReducer.selectedItems.items
+  );
 
-export default function MenuItems({ foods }) {
+  const isFoodInCart = (food, cartItems) =>
+    Boolean(cartItems.find((item) => item.title === food.title));
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       {foods.map((food, index) => (
         <View key={index}>
           <View style={styles.menuItemStyle}>
-            <BouncyCheckbox fillColor="green" iconStyle={{ borderColor: 'lightgray' }}/>
+            <BouncyCheckbox
+              fillColor="green"
+              iconStyle={{ borderColor: "lightgray" }}
+              isChecked={isFoodInCart(food, cartItems)}
+              onPress={(checkboxValue) => selectItem(food, checkboxValue)}
+            />
             <FoodInfo food={food} />
             <FoodImage food={food} />
           </View>
-          <Divider width={0.2} orientation="vertical" style={{ marginHorizontal: 20 }}/>
+          <Divider
+            width={0.2}
+            orientation="vertical"
+            style={{ marginHorizontal: 20 }}
+          />
         </View>
       ))}
     </ScrollView>
@@ -55,3 +65,16 @@ const FoodImage = ({ marginLeft, ...props }) => (
     />
   </View>
 );
+
+const styles = StyleSheet.create({
+  menuItemStyle: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    margin: 20,
+  },
+
+  titleStyles: {
+    fontSize: 19,
+    fontWeight: "bold",
+  },
+});

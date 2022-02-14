@@ -1,15 +1,39 @@
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import React from "react";
+import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import { Divider } from "react-native-elements";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-export default function MenuItems({ foods, restaurantName }) {
+const styles = StyleSheet.create({
+  menuItemStyle: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    margin: 20,
+  },
+
+  titleStyle: {
+    fontSize: 19,
+    fontWeight: "600",
+  },
+});
+
+export default function MenuItems({
+  restaurantName,
+  foods,
+  hideCheckbox,
+  marginLeft,
+}) {
   const dispatch = useDispatch();
+
   const selectItem = (item, checkboxValue) =>
     dispatch({
       type: "ADD_TO_CART",
-      payload: { ...item, restaurantName, checkboxValue },
+      payload: {
+        ...item,
+        restaurantName: restaurantName,
+        checkboxValue: checkboxValue,
+      },
     });
 
   const cartItems = useSelector(
@@ -24,17 +48,21 @@ export default function MenuItems({ foods, restaurantName }) {
       {foods.map((food, index) => (
         <View key={index}>
           <View style={styles.menuItemStyle}>
-            <BouncyCheckbox
-              fillColor="green"
-              iconStyle={{ borderColor: "lightgray" }}
-              isChecked={isFoodInCart(food, cartItems)}
-              onPress={(checkboxValue) => selectItem(food, checkboxValue)}
-            />
+            {hideCheckbox ? (
+              <></>
+            ) : (
+              <BouncyCheckbox
+                iconStyle={{ borderColor: "lightgray", borderRadius: 10 }}
+                fillColor="green"
+                isChecked={isFoodInCart(food, cartItems)}
+                onPress={(checkboxValue) => selectItem(food, checkboxValue)}
+              />
+            )}
             <FoodInfo food={food} />
-            <FoodImage food={food} />
+            <FoodImage food={food} marginLeft={marginLeft ? marginLeft : 0} />
           </View>
           <Divider
-            width={0.2}
+            width={0.5}
             orientation="vertical"
             style={{ marginHorizontal: 20 }}
           />
@@ -46,7 +74,7 @@ export default function MenuItems({ foods, restaurantName }) {
 
 const FoodInfo = (props) => (
   <View style={{ width: 240, justifyContent: "space-evenly" }}>
-    <Text style={styles.titleStyles}>{props.food.title}</Text>
+    <Text style={styles.titleStyle}>{props.food.title}</Text>
     <Text>{props.food.description}</Text>
     <Text>{props.food.price}</Text>
   </View>
@@ -65,16 +93,3 @@ const FoodImage = ({ marginLeft, ...props }) => (
     />
   </View>
 );
-
-const styles = StyleSheet.create({
-  menuItemStyle: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    margin: 20,
-  },
-
-  titleStyles: {
-    fontSize: 19,
-    fontWeight: "bold",
-  },
-});

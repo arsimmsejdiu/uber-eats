@@ -1,49 +1,50 @@
-import { View, Text, Image } from "react-native";
 import React from "react";
+import { View, Text, Image } from "react-native";
 
 export default function About(props) {
-  const { name, image, price, reviews, rating, categories } = props.route.params;
+  const { name, image, price, reviews, rating, categories } =
+    props.route.params;
 
-  const formatedCategories = categories.map((cat) => cat.title).join(" • ");
+  const formattedCategories = categories.map((cat) => cat.title).join(" • ");
 
-  const description = `${formatedCategories} ${
+  const description = `${formattedCategories} ${
     price ? " • " + price : ""
   } • 🎫 • ${rating} ⭐ (${reviews}+)`;
   return (
     <View>
       <RestaurantImage image={image} />
-      <RestaurantTitle name={name} />
+      <RestaurantName name={name} />
       <RestaurantDescription description={description} />
     </View>
   );
 }
 
-const RestaurantImage = ({ image }) => (
-  <Image source={{ uri: image }} style={{ width: "100%", height: 180 }} />
+const RestaurantImage = (props) => (
+  <Image source={{ uri: props.image }} style={{ width: "100%", height: 180 }} />
 );
 
-const RestaurantTitle = ({ name }) => (
+const RestaurantName = (props) => (
   <Text
     style={{
       fontSize: 29,
-      fontWeight: "bold",
+      fontWeight: "600",
       marginTop: 10,
       marginHorizontal: 15,
     }}
   >
-    {name}
+    {props.name}
   </Text>
 );
 
-const RestaurantDescription = ({ description }) => (
+const RestaurantDescription = (props) => (
   <Text
     style={{
       marginTop: 10,
       marginHorizontal: 15,
       fontWeight: "400",
-      fontSize: 14.5,
+      fontSize: 15.5,
     }}
   >
-    {description}
+    {props.description}
   </Text>
 );
